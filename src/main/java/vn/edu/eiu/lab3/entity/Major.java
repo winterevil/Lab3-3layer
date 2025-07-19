@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,9 +24,11 @@ public class Major {
 
     @ManyToOne
     @JoinColumn(name = "SchoolId")
+    @ToString.Exclude
     private School school;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "major")
+    @ToString.Exclude
     private List<Student> students =  new ArrayList<>();
 
     public void addStudent(Student student) {

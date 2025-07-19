@@ -35,7 +35,7 @@ public class StudentRepo {
     public static void remove(Student student) {
         EntityManager em = JpaUtil.getEntityManager();
         em.getTransaction().begin();
-        Student std = em.find(Student.class, student.getId());
+        Student std = em.find(Student.class, student.getStudentId());
         if  (std != null) {
             em.remove(std);
         }

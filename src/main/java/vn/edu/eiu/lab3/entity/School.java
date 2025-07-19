@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +26,11 @@ public class School {
     private String location;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "school")
+    @ToString.Exclude
     private List<Major> majors = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "sc")
+    @ToString.Exclude
     private List<Student> students = new ArrayList<>();
 
     public void addMajor(Major major) {
@@ -35,7 +40,7 @@ public class School {
 
     public void addStudent(Student student) {
         students.add(student);
-        student.setSchool(this);
+        student.setSc(this);
     }
 
     public School(String schoolId, String schoolName, String location) {

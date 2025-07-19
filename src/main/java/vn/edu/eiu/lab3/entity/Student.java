@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import vn.edu.eiu.lab3.Gender;
 
 import java.time.LocalDate;
@@ -16,7 +17,8 @@ import java.time.LocalDate;
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @Column(name = "StudentId")
+    private long studentId;
 
     @Column(name = "FullName", columnDefinition = "NVARCHAR(100)", nullable = false)
     private String fullName;
@@ -35,11 +37,13 @@ public class Student {
 
     @ManyToOne
     @JoinColumn(name = "MajorId")
+    @ToString.Exclude
     private Major major;
 
     @ManyToOne
     @JoinColumn(name = "SchoolId")
-    private School school;
+    @ToString.Exclude
+    private School sc;
 
     public Student(String fullName, Gender gender, LocalDate dob, double gpa, int enrollmentYear) {
         this.fullName = fullName;
